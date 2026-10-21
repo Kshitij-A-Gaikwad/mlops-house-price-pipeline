@@ -56,6 +56,7 @@ def test_invalid_numeric_text_fails():
 
 def test_infinity_fails():
     df = sample()
+    df["Area_sqft"] = df["Area_sqft"].astype(float)
     df.loc[0, "Area_sqft"] = np.inf
     with pytest.raises(ValueError, match="infinite"):
         validate_training_data(df, "Price_Lakhs", "House_ID")
