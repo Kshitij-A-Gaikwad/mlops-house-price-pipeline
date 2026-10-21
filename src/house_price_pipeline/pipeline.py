@@ -181,15 +181,24 @@ def train_and_evaluate(config_path="configs/config.yaml"):
     return metrics
 
 
+
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="House price training pipeline")
-    parser.add_argument(
-        "--config",
-        default="configs/config.yaml",
-        help="Path to the YAML configuration file",
-    )
+    parser = argparse.ArgumentParser(description="House Price MLOps Pipeline")
+    parser.add_argument("stage", choices=["validate", "train"])
+    parser.add_argument("--config", default="configs/config.yaml")
     args = parser.parse_args()
 
-    print(json.dumps(train_and_evaluate(args.config), indent=2))
+    config = load_config(args.config)
+
+    if args.stage == "validate":
+        df = pd.read_csv(config["data"]["train_path"])
+        validate_training_data(
+            df,
+            config["data"]["target"],
+            config["data"]["id_column"],
+        )
+        print(f"Validation passed: {len(df)} rows, {len(df.columns)} columns.")
+    elif args.stage == "train":
+        print(json.dumps(train_and_evaluate(args.config), indent=2))
