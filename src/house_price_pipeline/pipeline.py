@@ -182,4 +182,14 @@ def train_and_evaluate(config_path="configs/config.yaml"):
 
 
 if __name__ == "__main__":
-    print(json.dumps(train_and_evaluate(), indent=2))
+    import argparse
+
+    parser = argparse.ArgumentParser(description="House price training pipeline")
+    parser.add_argument(
+        "--config",
+        default="configs/config.yaml",
+        help="Path to the YAML configuration file",
+    )
+    args = parser.parse_args()
+
+    print(json.dumps(train_and_evaluate(args.config), indent=2))
