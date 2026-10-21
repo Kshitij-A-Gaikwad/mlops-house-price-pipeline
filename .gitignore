@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+artifacts/
+models/
+mlruns/
+*.log
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# Local MLflow tracking database
+mlflow.db
+mlflow.db-shm
+mlflow.db-wal
+mlruns/
+
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/

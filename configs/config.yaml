@@ -1,0 +1,24 @@
+project:
+  name: house-price-pipeline
+  random_state: 42
+
+data:
+  train_path: data/raw/capstone_house_prices_train.csv
+  incoming_path: data/raw/capstone_incoming_batches.csv
+  target: Price_Lakhs
+  id_column: House_ID
+  batch_column: Batch
+
+training:
+  test_size: 0.2
+  model_type: random_forest
+  n_estimators: 200
+  max_depth: 15
+
+evaluation:
+  minimum_r2: 0.50
+  maximum_rmse: 50.0
+
+outputs:
+  model_path: artifacts/house_price_model.joblib
+  metrics_path: artifacts/metrics.json
